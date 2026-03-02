@@ -1,0 +1,980 @@
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiwi-Edit: Versatile Video Editing via Instruction and Reference Guidance</title>
+    <meta name="description" content="KiwiEdit is a unified framework for high-quality video editing that supports text instructions, reference images, and their combination.">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <meta name="robots" content="all">
+    <meta content="en_EN" property="og:locale">
+    <meta content="website" property="og:type">
+    <meta content="KiwiEdit" property="og:title">
+    <meta content="Kiwi-Edit: Versatile Video Editing via Instruction and Reference Guidance" property="og:description">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Kiwi-Edit: Versatile Video Editing via Instruction and Reference Guidance">
+
+    <link rel="stylesheet" type="text/css" media="all" href="webpage/assets/stylesheets/main_free.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="webpage/kiwiedit.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/foundation.min.css">
+    <link href="webpage/assets/fontawesome-free-6.6.0-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            "HTML-CSS": {
+              scale: 95,
+              fonts: ["Gyre-Pagella"],
+              imageFont: null,
+              undefinedFamily: "'Arial Unicode MS', cmbright"
+            },
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+              }
+          });
+    </script>
+    <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <!-- <script src="../webpage/assets/scripts/navbar.js"></script> -->
+</head>
+
+<body>
+    <!-- ======================== Title Page ======================== -->
+    <div class="container blog" id="first-content" style="background-color: #d8e8d4;">
+        <div class="blog-title no-cover">
+            <div class="blog-intro">
+                <div>
+                    <h1 class="title kiwi-title">
+                        <span class="kiwi-title-inline">
+                            <span class="kiwi-title-head">
+                                <img src="webpage/images/logo.png" alt="Logo" class="kiwi-title-logo">
+                                <span><span style="color: rgb(111,168,220);">K</span><span style="color: rgb(111,176,81);">i</span><span style="color: rgb(224,103,102);">w</span><span style="color: rgb(246,178,107);">i</span>-Edit:</span>
+                            </span>
+                            Versatile Video Editing via Instruction and Reference Guidance
+                        </span>
+                    </h1>
+                    <p class="author">
+                        <a href="#" >Yiqi Lin</a>,
+                        <a href="#" >Guoqiang Liang</a>,
+                        <a href="#" >Ziyun Zeng</a>,
+                        <a href="#" >Zechen Bai</a>,
+                        <a href="#" >Yanzhe Chen</a>, <br>
+                        <a href="#" >Mike Zheng Shou</a><sup>✉️</sup>
+                    </p>
+                    <p class="author author-affiliation">
+                        <a href="https://sites.google.com/view/showlab/home" class="author-link">ShowLab, National University of Singapore</a> &nbsp;&nbsp;
+                    </p>
+                    <p class="abstract">
+                        We present <b>KiwiEdit</b>, a unified and <b>fully open-source</b> framework for instruction-guided and reference-guided video editing using natural language. KiwiEdit supports high-quality, temporally consistent edits across global and local tasks, and delivers strong open-model performance at <b>720p resolution</b> with released code, models, and datasets.
+                    </p>
+
+                    <div class="info">
+                        <div>
+                            <a href="#" class="button icon" style="background-color: rgba(255, 255, 255, 0.25)"> Paper <i class="fa-solid fa-book-open"></i></a> &nbsp;&nbsp;
+                            <a href="https://github.com/showlab/Kiwi-Edit" class="button icon" style="background-color: rgba(255, 255, 255, 0.25)"> Code <i class="fa-solid fa-code"></i></a> &nbsp;&nbsp;
+                            <a href="https://huggingface.co/collections/linyq/kiwi-edit" class="button icon" style="background-color: rgba(255, 255, 255, 0.25)"> Model <i class="fa-solid fa-cube"></i></a> &nbsp;&nbsp;
+                            <a href="https://huggingface.co/datasets/linyq/kiwi_edit_training_data/tree/main" class="button icon" style="background-color: rgba(255, 255, 255, 0.25)"> Datasets <i class="fa-solid fa-video-camera"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ======================== Feature Cards ======================== -->
+    <div class="container blog main first" id="blog-main">
+        <div class="feature-cards">
+            <div class="feature-card gradient-purple">
+                <span class="card-icon"><i class="fa-solid fa-film"></i></span>
+                <!-- <span class="card-icon"><i class="fa-solid fa-object-group"></i></span> -->
+                <h3>Fully Open Source</h3>
+                <p>Codes, models, and datasets are fully open-sourced.</p>
+            </div>
+            <div class="feature-card gradient-blue">
+                <span class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                <h3>Instruction Guided Editing</h3>
+                <p>Edit videos with natural language instructions for global and local modifications.</p>
+            </div>
+            <div class="feature-card gradient-green">
+                <span class="card-icon"><i class="fa-solid fa-image"></i></span>
+                <h3>Reference Image Guided</h3>
+                <p>Replace the background and Insert a reference object from a reference image to the target video.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ======================== Instruction-Guided Video Editing Results ======================== -->
+    <div class="container blog main">
+        <h1>Instruction-Guided Video Editing</h1>
+        <p class="text">
+            KiwiEdit supports a wide range of text instruction-based video editing tasks. Select a category below to view results.
+        </p>
+    </div>
+
+    <div class="container blog extra-large">
+        <!-- Tabs -->
+        <div class="gallery-tabs" data-gallery="instruction">
+            <span class="gallery-tab active" data-target="style">Global Style</span>
+            <span class="gallery-tab" data-target="global">Global Changes</span>
+            <span class="gallery-tab" data-target="background">Background Replace</span>
+            <span class="gallery-tab" data-target="remove">Local Remove</span>
+            <span class="gallery-tab" data-target="replace">Local Replace</span>
+            <span class="gallery-tab" data-target="add">Local Add</span>
+        </div>
+
+        <!-- Style Transfer -->
+        <div class="gallery-content active" data-gallery="instruction" data-id="style">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0009_global_style_Apply_the_sketch_sty_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0009_global_style_Apply_the_sketch_sty.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the sketch style to this video."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0014_global_style_Apply_the_Cartoon_an_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0014_global_style_Apply_the_Cartoon_an.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the Cartoon animation style to this video."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0007_global_style_Apply_the_dynamic_ae_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0007_global_style_Apply_the_dynamic_ae.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the dynamic aesthetic of abstract art to this video."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0041_global_style_Apply_the_Pop_Art_st_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0041_global_style_Apply_the_Pop_Art_st.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the Pop Art style to this video."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0035_global_style_Apply_the_Watercolor_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0035_global_style_Apply_the_Watercolor.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the Watercolor style to this video."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Edits -->
+        <div class="gallery-content" data-gallery="instruction" data-id="global">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0019_global_style_Apply_the_sunny_aest_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0019_global_style_Apply_the_sunny_aest.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the sunny aesthetic to this video."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0016_global_style_Apply_the_immersive_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0016_global_style_Apply_the_immersive.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the immersive snowy style to this video."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0025_global_style_Apply_the_dawn_aesth_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0025_global_style_Apply_the_dawn_aesth.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the dawn aesthetic to this video."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0011_global_style_Apply_the_pixel_art_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0011_global_style_Apply_the_pixel_art.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Apply the night aesthetic to this video."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change background -->
+        <div class="gallery-content" data-gallery="instruction" data-id="background">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0145_background_change_Replace_the_backgrou_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0145_background_change_Replace_the_backgrou.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Replace the background with a lively urban garden scene during winter."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0135_background_change_Replace_the_backgrou2_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0135_background_change_Replace_the_backgrou2.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Replace the background with a dynamic snowy mountain retreat."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0162_background_change_Transform_the_backgr3_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0162_background_change_Transform_the_backgr3.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Transform the background into a dynamic mountain sunrise scene."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0143_background_change_Replace_the_backgrou_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0143_background_change_Replace_the_backgrou.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Replace the background with a dynamic modern conference room where sunlight streams through glass walls casting moving shadows."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Removal -->
+        <div class="gallery-content" data-gallery="instruction" data-id="remove">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0239_local_remove_Remove_the_small_bir_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0239_local_remove_Remove_the_small_bir.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Remove the small bird."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0191_local_remove_Remove_the_person_we_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0191_local_remove_Remove_the_person_we.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Remove the person wearing a light blue shirt and dark pants from the entire video sequence."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0199_local_remove_Remove_the_man_with_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0199_local_remove_Remove_the_man_with.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Remove the man with short, neatly combed hair, wearing a light gray sweater with a dark collar."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0206_local_remove_Remove_the_young_wom_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0206_local_remove_Remove_the_young_wom.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Remove the young woman with long, dark hair, glasses, and a white long-sleeved top from the entire video sequence."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0195_local_remove_Remove_the_young_boy_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0195_local_remove_Remove_the_young_boy.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Remove the young boy wearing a vibrant red beanie, a colorful jacket adorned with green and yellow circles."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local Edits -->
+        <div class="gallery-content" data-gallery="instruction" data-id="replace">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0309_creative_edit_Given_the_video_of_t_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0309_creative_edit_Given_the_video_of_t.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Transform the entire bread surface into a miniature lush forest with green trees, moss, and tiny flowers shaped exactly like the loaf."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0062_local_change_Replace_the_dog_in_t_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0062_local_change_Replace_the_dog_in_t.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Replace the orange sweater with a cozy blue winter jacket."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0083_local_change_Replace_the_sofa_wit2_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0083_local_change_Replace_the_sofa_wit2.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Replace the sofa with a classic brown leather sofa with visible stitching."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0091_local_change_Replace_the_plant_wi_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0091_local_change_Replace_the_plant_wi.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Replace the plant with broad green leaves with a lush tropical palm plant."</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Add Object -->
+        <div class="gallery-content" data-gallery="instruction" data-id="add">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0290_local_add_Overlay_an_animated_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0290_local_add_Overlay_an_animated.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Add an small dark green backpack onto the person's back, ensuring it is perfectly tracked to their movements."</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0095_local_change_Add_a_classic_brown_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0095_local_change_Add_a_classic_brown.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Add a classic brown fedora hat to the boy's head."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0101_local_change_Add_a_neatly_trimmed_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0101_local_change_Add_a_neatly_trimmed.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Add a neatly trimmed dark beard to the man."</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-pair">
+                        <div>
+                            <div class="pair-label">Input</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0269_local_add_Overlay_an_animated_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0269_local_add_Overlay_an_animated.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">"Add an floor lamp near the corner of the room in front of the desk behind the man."</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- ======================== Reference Image-Guided Editing Results ======================== -->
+    <div class="container blog main">
+        <h1>Reference Image-Guided Video Editing</h1>
+        <p class="text">
+            KiwiEdit can transfer visual attributes from a reference image to the target video. The model extracts background or subject information from the reference image while preserving the original motion and structure of the video.
+        </p>
+    </div>
+
+    <div class="container blog extra-large">
+        <div class="gallery-tabs" data-gallery="reference">
+            <span class="gallery-tab active" data-target="ref-background">Background Replace</span>
+            <span class="gallery-tab" data-target="ref-subject">Subject Edit</span>
+        </div>
+
+        <!-- Reference Style Transfer -->
+        <div class="gallery-content active" data-gallery="reference" data-id="ref-background">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/0_mountain_ink_1664_928_0.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/1_Replace_th_gym-ball_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/1_Replace_th_gym-ball.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the background with a Chinese ink painting, featuring a large golden mountain peak rising above swirling clouds.</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/21_ghibli_summer_clouds_1664_928_0.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/16_Replace_th_0234_local_remove_Remove_the_person_in_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/16_Replace_th_0234_local_remove_Remove_the_person_in.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the background with a serene anime-style landscape, featuring a massive, fluffy cumulonimbus cloud towering over a windswept grassy hill.</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/7_fairytale_storybook_style_1664_928_0.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/29_Replace_th_hike_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/29_Replace_th_hike.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the background with a whimsical fairytale landscape, featuring colorful mushroom houses and a floating castle in a magical forest.</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/bg_07_1664_928_0.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/10_Replace_th_0103_local_change_Replace_the_green_le_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/10_Replace_th_0103_local_change_Replace_the_green_le.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the background with the Pyramids of Giza, ancient triangular monuments standing in the desert sand.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reference Appearance Transfer -->
+        <div class="gallery-content" data-gallery="reference" data-id="ref-subject">
+            <div class="video-grid">
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/26_flatlay_techwear_jacket_1328_1328_1.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/38_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/38.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the girl's cloth with a matte black techwear tactical jacket.</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/41_shape_heart_sunglasses_1328_1328_1.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0125_background_change_Replace_the_backgrou_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0125_background_change_Replace_the_backgrou.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Add a pair of iconic red heart-shaped sunglasses to the girl's face.</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/75_ref_chair_midcentury_leather_1328_1328_1.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0097_local_change_Replace_the_mans_or_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0097_local_change_Replace_the_mans_or.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the sofa with a mid-century modern lounge chair with an ottoman.</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-triple">
+                        <div>
+                            <div class="pair-label">Reference</div>
+                            <img src="webpage/images/87_ref_hair_blonde_waves_back_1328_1328_1.png" alt="Reference image">
+                        </div>
+                        <div>
+                            <div class="pair-label">Input Video</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0078_local_change_Add_stylish_black_ca_raw.mp4" poster="https://placehold.co/320x180/e8e8e8/aaa?text=Input+Video"></video>
+                        </div>
+                        <div>
+                            <div class="pair-label">Output</div>
+                            <video loop playsinline muted autoplay src="webpage/videos/0078_local_change_Add_stylish_black_ca.mp4" poster="https://placehold.co/320x180/d8e8d4/666?text=Edited+Video"></video>
+                        </div>
+                    </div>
+                    <div class="edit-caption">Replace the woman's hair with hair style of long, voluminous platinum blonde hair with loose waves.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ======================== Quantitative Results ======================== -->
+    <div class="container blog main">
+        <h1>Quantitative Results</h1>
+
+        <h2>OpenVE-Bench</h2>
+        <p class="text">
+            We evaluate on OpenVE-Bench, assessed by Gemini-2.5-Pro, across five editing categories: Global Style, Background Change, Local Change, Local Remove, and Local Add. KiwiEdit (Stage-3 Instruct-Reference) achieves the best overall score among open-source methods.
+        </p>
+
+        <div class="results-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>#Params.</th>
+                        <th>#Reso.</th>
+                        <th>Overall &uarr;</th>
+                        <th>Global Style &uarr;</th>
+                        <th>Background Change &uarr;</th>
+                        <th>Local Change &uarr;</th>
+                        <th>Local Remove &uarr;</th>
+                        <th>Local Add &uarr;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>VACE</td>
+                        <td>14B</td>
+                        <td>1280&times;720</td>
+                        <td>1.57</td>
+                        <td>1.49</td>
+                        <td>1.55</td>
+                        <td>2.07</td>
+                        <td>1.46</td>
+                        <td>1.26</td>
+                    </tr>
+                    <tr>
+                        <td>OmniVideo</td>
+                        <td>1.3B</td>
+                        <td>640&times;352</td>
+                        <td>1.19</td>
+                        <td>1.11</td>
+                        <td>1.18</td>
+                        <td>1.14</td>
+                        <td>1.14</td>
+                        <td>1.36</td>
+                    </tr>
+                    <tr>
+                        <td>InsViE</td>
+                        <td>2B</td>
+                        <td>720&times;480</td>
+                        <td>1.45</td>
+                        <td>2.20</td>
+                        <td>1.06</td>
+                        <td>1.48</td>
+                        <td>1.36</td>
+                        <td>1.17</td>
+                    </tr>
+                    <tr>
+                        <td>Lucy-Edit</td>
+                        <td>5B</td>
+                        <td>1280&times;704</td>
+                        <td>2.22</td>
+                        <td>2.27</td>
+                        <td>1.57</td>
+                        <td>3.20</td>
+                        <td>1.75</td>
+                        <td>2.30</td>
+                    </tr>
+                    <tr>
+                        <td>ICVE</td>
+                        <td>13B</td>
+                        <td>384&times;240</td>
+                        <td>2.18</td>
+                        <td>2.22</td>
+                        <td>1.62</td>
+                        <td>2.57</td>
+                        <td>2.51</td>
+                        <td>1.97</td>
+                    </tr>
+                    <tr>
+                        <td>DITTO</td>
+                        <td>14B</td>
+                        <td>832&times;480</td>
+                        <td>2.13</td>
+                        <td>4.01</td>
+                        <td>1.68</td>
+                        <td>2.03</td>
+                        <td>1.53</td>
+                        <td>1.41</td>
+                    </tr>
+                    <tr>
+                        <td>OpenVE-Edit</td>
+                        <td>5B</td>
+                        <td>1280&times;704</td>
+                        <td>2.50</td>
+                        <td>3.16</td>
+                        <td>2.36</td>
+                        <td>2.98</td>
+                        <td>1.85</td>
+                        <td>2.15</td>
+                    </tr>
+                    <tr style="background-color:#E6F2FF;">
+                        <td><b>Ours</b> (Stage-2 Instruct-Only)</td>
+                        <td>5B</td>
+                        <td>720&times;480</td>
+                        <td>2.92</td>
+                        <td>3.54</td>
+                        <td>3.80</td>
+                        <td>2.59</td>
+                        <td>2.55</td>
+                        <td>2.12</td>
+                    </tr>
+                    <tr style="background-color:#E6F2FF;">
+                        <td><b>Ours</b> (Stage-2 Instruct-Only)</td>
+                        <td>5B</td>
+                        <td>1280&times;704</td>
+                        <td>2.98</td>
+                        <td>3.54</td>
+                        <td>3.84</td>
+                        <td>2.57</td>
+                        <td>2.71</td>
+                        <td>2.25</td>
+                    </tr>
+                    <tr style="background-color:#E6F2FF;">
+                        <td><b>Ours</b> (Stage-3 Instruct-Reference)</td>
+                        <td>5B</td>
+                        <td>1280&times;704</td>
+                        <td>3.02</td>
+                        <td>3.64</td>
+                        <td>2.64</td>
+                        <td>3.83</td>
+                        <td>2.63</td>
+                        <td>2.36</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>RefVIE-Bench</h2>
+        <p class="text">
+            We report subject-reference and background-reference evaluation scores on RefVIE-Bench. The table summarizes identity/temporal/physical consistency for subject guidance, reference similarity/matting/video quality for background guidance, and an overall score.
+        </p>
+
+        <div class="results-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Model</th>
+                        <th colspan="3">Subject Reference</th>
+                        <th colspan="3">Background Reference</th>
+                        <th rowspan="2">Overall</th>
+                    </tr>
+                    <tr>
+                        <th>Identity Consist.</th>
+                        <th>Temporal Consist.</th>
+                        <th>Physical Consist.</th>
+                        <th>Reference Sim.</th>
+                        <th>Matting Quality</th>
+                        <th>Video Quality</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Runway Aleph</td>
+                        <td>3.79</td>
+                        <td>3.65</td>
+                        <td>3.58</td>
+                        <td>3.33</td>
+                        <td>2.81</td>
+                        <td>2.58</td>
+                        <td>3.29</td>
+                    </tr>
+                    <tr>
+                        <td>Kling-O1</td>
+                        <td>4.75</td>
+                        <td>4.66</td>
+                        <td>4.60</td>
+                        <td>3.95</td>
+                        <td>3.21</td>
+                        <td>2.75</td>
+                        <td>3.99</td>
+                    </tr>
+                    <tr style="background-color:#E6F2FF;">
+                        <td><b>Ours</b> (All data)</td>
+                        <td>3.51</td>
+                        <td>2.96</td>
+                        <td>2.91</td>
+                        <td>3.40</td>
+                        <td>2.58</td>
+                        <td>2.40</td>
+                        <td>2.96</td>
+                    </tr>
+                    <tr style="background-color:#E6F2FF;">
+                        <td><b>Ours</b> (Ref. data only)</td>
+                        <td>3.98</td>
+                        <td>3.40</td>
+                        <td>3.34</td>
+                        <td>3.72</td>
+                        <td>2.90</td>
+                        <td>2.51</td>
+                        <td>3.31</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- ======================== Method ======================== -->
+    <div class="container blog main">
+        <h1>Methodology</h1>
+        <h2>Architecture Design</h2>
+        <p class="text">
+            KiwiEdit combines a Multimodal LLM and a video diffusion transformer. Given a source video, an editing instruction, and an optional reference image, the model produces temporally consistent edited videos with controllable appearance and structure.
+        </p>
+
+        <ul class="contribution-list">
+            <li><b>Semantic Guidance:</b> The MLLM extracts instruction and reference features to guide what should be edited.</li>
+            <li><b>Structure Preservation:</b> Source-video latents are injected into the generation process to keep motion and scene layout stable.</li>
+            <li><b>Reference Fidelity:</b> Reference visual tokens help transfer desired style and appearance details.</li>
+        </ul>
+    </div>
+
+    <div class="container blog extra-large">
+        <div class="method-figure">
+            <img src="webpage/images/model.png" alt="KiwiEdit architecture diagram">
+        </div>
+        <p class="caption">
+            <b>Architecture overview.</b> The MLLM provides semantic guidance (instruction and reference context tokens), while the DiT receives both semantic context and direct structural controls from source/reference latents for controllable video editing.
+        </p>
+    </div>
+
+    <div class="container blog main">
+        <h2>Training Curriculum</h2>
+        <p class="text">
+            We train KiwiEdit with a simple three-stage curriculum: alignment, instruction tuning, and reference-guided fine-tuning. This progressive strategy improves stability and enables strong performance across instruction-only, reference-only, and joint editing settings.
+        </p>
+
+        <ul class="contribution-list">
+            <li><b>Stage 1:</b> Align multimodal representations between the MLLM and the diffusion backbone.</li>
+            <li><b>Stage 2:</b> Scale instruction-guided editing with large image/video data.</li>
+            <li><b>Stage 3:</b> Add reference-guided training for precise visual control (up to 81 video frames).</li>
+        </ul>
+    </div>
+
+    <!-- ======================== Dataset ======================== -->
+    <div class="container blog main">
+        <h1>Training Dataset</h1>
+        <p class="text">
+            We build an automated pipeline to convert instruction triplets into reference-guided training quadruplets.
+        </p>
+        <ul class="contribution-list">
+            <li><b>Raw pool:</b> 3.7M samples from Ditto-1M, ReCo, and OpenVE-3M.</li>
+            <li><b>Stage 1:</b> Quality filtering with EditScore. (Also used for instruction-only training.)</li>
+            <li><b>Stage 2:</b> Instruction-aware grounding and segmentation.</li>
+            <li><b>Stage 3:</b> Reference image synthesis for local and background edits.</li>
+            <li><b>Stage 4:</b> Semantic verification and global de-duplication.</li>
+            <li><b>Final Reference Video Editing Dataset:</b> 477K high-quality quadruplets with balanced task coverage, released for research use.</li>
+        </ul>
+    </div>
+
+    <!-- ======================== Citation ======================== -->
+    <div class="container blog main">
+        <h1>Citation</h1>
+        <p class="text">
+            If you find KiwiEdit useful for your research, please cite our paper:
+        </p>
+<pre><code class="plaintext">@article{kiwiedit2026,
+    title={Kiwi-Edit: Versatile Video Editing via Instruction and Reference Guidance},
+    author={Author A and Author B and Author C and Author D and Author E},
+    journal={arXiv preprint arXiv:2026.XXXXX},
+    year={2026}
+}</code></pre>
+    </div>
+
+
+    <!-- ======================== Footer ======================== -->
+    <footer>
+        <div class="container">
+            <p>
+                This website is built on the <a href="https://shikun.io/projects/clarity">Clarity Template</a>, designed by <a href="https://shikun.io/">Shikun Liu</a>. &nbsp; KiwiEdit - 2025.
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="webpage/kiwiedit.js"></script>
+</body>
+</html>
