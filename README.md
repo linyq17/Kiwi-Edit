@@ -1,14 +1,17 @@
-<h1><img src="https://github.com/linyq17/linyq17.github.io/blob/main/Kiwi-Edit/images/logo.png?raw=true" alt="Logo" width="30">
+<h1><img src="webpage/images/logo.png" alt="Logo" width="30">
 <span style="color: #6fa8dc;">K</span><span style="color: #6fb051;">i</span><span style="color: #e06766;">w</span><span style="color: #f6b26b;">i</span>-Edit: Versatile Video Editing via Instruction and Reference Guidance
 </h1>
 <p align="center">
   🌐 <a href="https://showlab.github.io/Kiwi-Edit">Project Page</a>&nbsp | 📑 <a href="#quick-start">Paper</a>&nbsp |  🤗 <a href="https://huggingface.co/collections/linyq/kiwi-edit">Models(🧨)</a> | 🤗 <a href="https://huggingface.co/datasets/linyq/kiwi_edit_training_data">Datasets</a>
 </p>
 
-Kiwi-Edit is a versatile video editing framework bulid upon on mllm encoder and video dit for:
+Kiwi-Edit is a versatile video editing framework built on an MLLM encoder and a video DiT for:
 - instruction video editing
 - reference image + instruction video editing
 
+## News
+
+- [2026-03-03] Code and model released.
 
 ## Quick Start
 
@@ -66,7 +69,7 @@ python diffusers_demo.py \
 
 ### Dataset Format
 
-All training metadata uses CSV, we provide demo data in the repo:
+All training metadata uses CSV; we provide demo data in the repo:
 
 - Image stage: `src_video`, `tgt_video`, `prompt`  
   Example: `demo_data/image_demo_training_set.csv`
@@ -85,18 +88,28 @@ Use the provided scripts in `scripts/`. Example:
 bash scripts/run_wan2.2_ti2v_5b_qwen25vl_3b_stage3_img_vid_refvid_720x1280_81f.sh
 ```
 
+Training scripts, key parameters, and placeholder links:
+
+| Script | Model Size | Training Stage (Data) | Max Pixels | Frames | LR | Steps | Model Weights |
+| - | - | - | - | - | - | - | - |
+| [link](scripts/run_wan2.2_ti2v_5b_qwen25vl_3b_stage1_img_1024x1024_1f.sh) | [Qwen2.5-VL-3B](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)+[Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) | Stage 1 (Image) | 1024x1024 | 1 | 1e-5 | 30K | [link](https://huggingface.co/linyq/wan2.2_ti2v_5b_qwen25vl_3b_stage1_img_only) |
+| [link](scripts/run_wan2.2_ti2v_5b_qwen25vl_3b_stage2_img_vid_600x600_81f.sh) | [Qwen2.5-VL-3B](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)+[Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) | Stage 2 (Image + Video) | 600x600 | 81 | 1e-5 | 20K | [link](https://huggingface.co/linyq/wan2.2_ti2v_5b_qwen25vl_3b_stage2_img_vid_600x600_81f) |
+| [link](scripts/run_wan2.2_ti2v_5b_qwen25vl_3b_stage2_img_vid_720x1280_81f.sh) | [Qwen2.5-VL-3B](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)+[Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) | Stage 2 (Image + Video) | 720x1280 | 81 | 1e-5 | 20K | [link](https://huggingface.co/linyq/wan2.2_ti2v_5b_qwen25vl_3b_stage2_img_vid_720x1280_81f) |
+| [link](scripts/run_wan2.2_ti2v_5b_qwen25vl_3b_stage3_img_vid_refvid_720x1280_81f.sh) | [Qwen2.5-VL-3B](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)+[Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) | Stage 3 (Image + Video + Ref-Video) | 720x1280 | 81 | 5e-6 | 15K | [link](https://huggingface.co/linyq/wan2.2_ti2v_5b_qwen25vl_3b_stage3_img_vid_refvid_720x1280_81f) |
+| [link](scripts/run_wan2.2_ti2v_5b_qwen25vl_3b_stage3_refvid_720x1280_81f.sh) | [Qwen2.5-VL-3B](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct)+[Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) | Stage 3 (Ref-Video) | 720x1280 | 81 | 5e-6 | 30K | [link](https://huggingface.co/linyq/wan2.2_ti2v_5b_qwen25vl_3b_stage3_refvid_only_720x1280_81f_pad_first) |
+
 
 ### Evaluation
-For benchmark inferece example:
+For benchmark inference example:
 ```bash
 python infer.py \
   --ckpt_path path_to_ckpt \
-  --bench openve \ # or refvie
+  --bench openve \  # or refvie
   --max_frame 81 \
   --max_pixels 921600 \
   --save_dir ./infer_results/exp_name/
 ```
-For score evaluation see `eval_openve_gemini.py` and `eval_refvie_gemini.py`. 
+For score evaluation, see `eval_openve_gemini.py` and `eval_refvie_gemini.py`.
 
 Example:
 
@@ -108,13 +121,11 @@ python eval_openve_gemini.py --video_paths path_to_videos
 
 - Review and secure API key handling before running Gemini-based evaluation scripts.
 - For Diffusers conversion, see `utils/convert_diffusers/README.md`.
-- Some scripts include cluster-specific paths / tmux snippets; adapt them for your environment.
 - Default benchmark paths in inference scripts assume datasets are under `./benchmark/...`.
-- For debugging memory issues, reduce `--max_frame` and/or `--max_pixels`.
 
 ## Acknowledgements
 
-Kiwi-Edit builds on training framework [ModelScope DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio), open-sourced datasets [Ditto-1M](https://huggingface.co/datasets/QingyanBai/Ditto-1M/tree/main/videos/source), [OpenVE-3M](https://huggingface.co/datasets/Lewandofski/OpenVE-3M), [ReCo](https://huggingface.co/datasets/HiDream-ai/ReCo-Data/tree/main), reward model [EditScore](https://github.com/VectorSpaceLab/EditScore) and image generation model [Qwen-Image-Edit](https://huggingface.co/Qwen/Qwen-Image-Edit-2511).
+Kiwi-Edit builds on training framework [ModelScope DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio), open-sourced datasets [Ditto-1M](https://huggingface.co/datasets/QingyanBai/Ditto-1M/tree/main/videos/source), [OpenVE-3M](https://huggingface.co/datasets/Lewandofski/OpenVE-3M), [ReCo](https://huggingface.co/datasets/HiDream-ai/ReCo-Data/tree/main), [GPT-Image-Edit-1.5M](https://huggingface.co/datasets/UCSC-VLAA/GPT-Image-Edit-1.5M), [NHR-Edit](https://huggingface.co/datasets/iitolstykh/NHR-Edit), reward model [EditScore](https://github.com/VectorSpaceLab/EditScore) and image generation model [Qwen-Image-Edit](https://huggingface.co/Qwen/Qwen-Image-Edit-2511).
 
 ## Citation
 
