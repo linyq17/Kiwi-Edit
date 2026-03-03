@@ -2,7 +2,7 @@
 <span style="color: #6fa8dc;">K</span><span style="color: #6fb051;">i</span><span style="color: #e06766;">w</span><span style="color: #f6b26b;">i</span>-Edit: Versatile Video Editing via Instruction and Reference Guidance
 </h1>
 <p align="center">
-  🌐 <a href="https://showlab.github.io/Kiwi-Edit">Project Page</a>&nbsp | 📑 <a href="#quick-start">Paper</a>&nbsp |  🤗 <a href="https://huggingface.co/collections/linyq/kiwi-edit">Models(🧨)</a> | 🤗 <a href="https://huggingface.co/datasets/linyq/kiwi_edit_training_data">Datasets</a>
+  🌐 <a href="https://showlab.github.io/Kiwi-Edit">Project Page</a>&nbsp | 📑 <a href=https://arxiv.org/abs/2603.02175">Paper</a>&nbsp |  🤗 <a href="https://huggingface.co/collections/linyq/kiwi-edit">Models(🧨)</a> | 🤗 <a href="https://huggingface.co/datasets/linyq/kiwi_edit_training_data">Datasets</a>
 </p>
 
 Kiwi-Edit is a versatile video editing framework built on an MLLM encoder and a video DiT for:
@@ -132,6 +132,13 @@ Kiwi-Edit builds on training framework [ModelScope DiffSynth-Studio](https://git
 If you use our code in your work, please cite [our paper]():
 
 ```bibtex
-@article{
+@misc{kiwiedit,
+      title={Kiwi-Edit: Versatile Video Editing via Instruction and Reference Guidance}, 
+      author={Yiqi Lin and Guoqiang Liang and Ziyun Zeng and Zechen Bai and Yanzhe Chen and Mike Zheng Shou},
+      year={2026},
+      eprint={2603.02175},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2603.02175}, 
 }
 ```
