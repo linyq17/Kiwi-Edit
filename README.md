@@ -128,6 +128,14 @@ or
 bash install_diffusers_env.sh
 ```
 
+**Diffusers model zoo:**
+
+| Model | Type | Hugging Face |
+| - | - | - |
+| `kiwi-edit-5b-instruct-only-diffusers` | Only Fintune on Instruction Data | [linyq/kiwi-edit-5b-instruct-only-diffusers](https://huggingface.co/linyq/kiwi-edit-5b-instruct-only-diffusers) |
+| `kiwi-edit-5b-reference-only-diffusers` | Only Fintune on Reference Data | [linyq/kiwi-edit-5b-reference-only-diffusers](https://huggingface.co/linyq/kiwi-edit-5b-reference-only-diffusers) |
+| `kiwi-edit-5b-instruct-reference-diffusers` | Fintune on  Instruction and Reference Data | [linyq/kiwi-edit-5b-instruct-reference-diffusers](https://huggingface.co/linyq/kiwi-edit-5b-instruct-reference-diffusers) |
+
 **2) Run a quick test on demo video:**
 
 ```bash
