@@ -180,6 +180,8 @@ Training scripts, key parameters, and placeholder links:
 
 
 ### Evaluation
+The RefVIE-Benchmark is realease in [here](https://huggingface.co/datasets/linyq/RefVIE-Bench).
+
 For benchmark inference example:
 ```bash
 python infer.py \

@@ -13,6 +13,8 @@ Released Kiwi-Edit training metadata:
 
 For runnable examples, see files under [`demo_data/`](demo_data/).
 
+The RefVIE-Benchmark is realease in [here](https://huggingface.co/datasets/linyq/RefVIE-Bench).
+
 ## CSV Format by Training Stage
 
 All metadata files are CSV. Paths should be relative to `--dataset_base_path` (or absolute paths).
@@ -38,7 +40,7 @@ video/source/yyy.mp4,video/target/yyy.mp4,ref_images/yyy.jpg,Make it in anime st
 ## How Metadata Maps to Training Scripts
 
 - `--img_dataset_metadata_path`: stage-1 image-style supervision (and reused in mixed stages)
-- `--vid_dataset_metadata_path`: stage-2 video supervision
+- `--vid_dataset_metadata_path`: stage-2 instruction video supervision
 - `--vid_ref_dataset_metadata_path`: stage-3 reference-video supervision
 
 ## Build Reference CSV from Parquet
