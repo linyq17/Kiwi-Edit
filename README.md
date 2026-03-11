@@ -203,7 +203,7 @@ benchmark/
 
 For benchmark inference example:
 ```bash
-python infer.py \
+python test_benchmark.py \
   --ckpt_path path_to_ckpt \
   --bench openve \  # or refvie
   --max_frame 81 \
