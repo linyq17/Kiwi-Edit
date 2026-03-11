@@ -1,5 +1,7 @@
 # Dataset Preparation
 
+## Training Dataset
+
 This project trains on a mixture of public video/image editing datasets:
 
 - Video editing: [Ditto-1M](https://huggingface.co/datasets/QingyanBai/Ditto-1M/tree/main/videos/source), [OpenVE-3M](https://huggingface.co/datasets/Lewandofski/OpenVE-3M), [ReCo](https://huggingface.co/datasets/HiDream-ai/ReCo-Data/tree/main)
@@ -12,6 +14,28 @@ Released Kiwi-Edit training metadata:
 - Reference-video parquet: [refvie_477k](https://huggingface.co/datasets/linyq/kiwi_edit_training_data/tree/main/refvie_477k)
 
 For runnable examples, see files under [`demo_data/`](demo_data/).
+
+## Evaluation Benchmark
+
+Here are the download links for the evaluation benchmark datasets:
+
+- **OpenVE-Bench**: https://huggingface.co/datasets/Lewandofski/OpenVE-Bench
+- **RefVIE-Bench**: https://huggingface.co/datasets/linyq/RefVIE-Bench
+
+After downloading, the expected directory structure under `./benchmark/` is:
+
+```
+benchmark/
+├── OpenVE-Bench/
+│   ├── videos/
+│   ├── benchmark_videos.csv
+│   └── README.md
+└── RefVIE-Bench/
+    ├── ref_images/
+    ├── source_videos/
+    └── refvie_bench.yaml
+```
+
 
 ## CSV Format by Training Stage
 

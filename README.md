@@ -180,6 +180,27 @@ Training scripts, key parameters, and placeholder links:
 
 
 ### Evaluation
+
+Here are the download links for the evaluation benchmark datasets:
+
+- **OpenVE-Bench**: https://huggingface.co/datasets/Lewandofski/OpenVE-Bench
+- **RefVIE-Bench**: https://huggingface.co/datasets/linyq/RefVIE-Bench
+
+After downloading, the expected directory structure under `./benchmark/` is:
+
+```
+benchmark/
+├── OpenVE-Bench/
+│   ├── videos/
+│   ├── benchmark_videos.csv
+│   └── README.md
+└── RefVIE-Bench/
+    ├── ref_images/
+    ├── source_videos/
+    └── refvie_bench.yaml
+```
+
+
 For benchmark inference example:
 ```bash
 python infer.py \
