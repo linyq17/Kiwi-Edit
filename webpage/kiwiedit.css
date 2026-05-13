@@ -606,7 +606,7 @@
 }
 
 .results-table-wrapper.wide {
-  width: min(96vw, 1180px);
+  width: min(99vw, 1500px);
   position: relative;
   left: 50%;
   transform: translateX(-50%);
